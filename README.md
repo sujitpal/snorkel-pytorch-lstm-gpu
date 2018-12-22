@@ -4,7 +4,7 @@ Code for my GPU port of Snorkel's Pytorch discriminative model (LSTM).
 
 ## Installation
 
-Note that this code was tested to work with snorkel-0.7.0.
+Note that this code was tested to work with snorkel-0.7.0-beta.
 
 I assume that you already have Snorkel installed as a conda environment. If not, please follow [instructions under the Quick Start section on the Snorkel github page](https://github.com/HazyResearch/snorkel#installation--dependencies). Once you have an environment set up, locate the folder for package snorkel.learning.pytorch. I do this by running a find like so:
 
