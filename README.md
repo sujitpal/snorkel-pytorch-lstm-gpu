@@ -25,7 +25,7 @@ To make this code available under Snorkel, just link the `snorkel.learning.pytor
 
 The following snippet shows how to instantiate and train the LSTM object in the `pytorch_gpu` package.
 
-The `use_cudnn` parameter exists for `TorchNoiseAwareModel` (grandparent of `LSTM`) but does not seem to actually do anything. I set it up so that if it is set to True, the code will check for `torch.cuda.is_enabled()` and copy the module or variable to one of torch.device("cuda:0") or torch.device("cpu") so the operation can happen there. This is the pattern recommended in [Pytorch 0.4.0 migration guide](https://pytorch.org/blog/pytorch-0_4_0-migration-guide/). The general principle is that I set all the Modules that are used outside the `_build_model` function to GPU, as well as all Torch tensors that are accessed in the training loop (forward/backward).
+The `use_cudnn` parameter exists for `TorchNoiseAwareModel` (grandparent of `LSTM`) but does not seem to actually do anything. I set it up so that if it is set to True, the code will check for `torch.cuda.is_enabled()` and copy the module or variable to one of `torch.device("cuda:0")` or `torch.device("cpu")` so the operation can happen there, i.e., the pattern recommended in [Pytorch 0.4.0 migration guide](https://pytorch.org/blog/pytorch-0_4_0-migration-guide/). The general principle is that I set all the Modules that are used outside the `_build_model` function to GPU, as well as all Torch tensors that are accessed in the training loop (forward/backward).
 
 ```python
 from snorkel.learning.pytorch_gpu.rnn import LSTM
@@ -52,7 +52,7 @@ lstm.train(train_cands, train_marginals,
 
 ## Results
 
-I ran the training against a CPU box (with `snorkel.learning.pytorch.LSTM`) and GPU box (with `snorkel.learning.pytorch_gpu.LSTM`), and plotted the numbers from the console logs. The model itself does not perform very well, but the training time on CPU is approximately 5x longer than on GPU for comparable loss and dev F1 values.
+I ran the training against a CPU box (t3.xlarge) with `snorkel.learning.pytorch.LSTM` and GPU box (p2.xlarge) with `snorkel.learning.pytorch_gpu.LSTM`, and plotted the numbers from the console logs. The model itself does not perform very well, but the training time on CPU is approximately 5x longer than on GPU for comparable loss and dev F1 values.
 
 <img src="docs/lstm_train_chart.png"/>
 
